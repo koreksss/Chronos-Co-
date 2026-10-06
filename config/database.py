@@ -1,12 +1,19 @@
+import os
+from urllib.parse import quote_plus
+
 from sqlalchemy import create_engine, text
 
-SERVER = r"HUWI\SQLEXPRESS"
-DATABASE = "ChronosCo"
+
+SERVER = os.getenv("DB_SERVER", "localhost,1433")
+DATABASE = os.getenv("DB_DATABASE", "ChronosCo")
+USERNAME = os.getenv("DB_USERNAME", "chronosco_app")
+PASSWORD = os.getenv("DB_PASSWORD", "")
 
 connection_string = (
-    f"mssql+pyodbc://@{SERVER}/{DATABASE}"
+    f"mssql+pyodbc://{quote_plus(USERNAME)}:{quote_plus(PASSWORD)}"
+    f"@{SERVER}/{DATABASE}"
     "?driver=ODBC+Driver+17+for+SQL+Server"
-    "&trusted_connection=yes"
+    "&TrustServerCertificate=yes"
 )
 
 engine = create_engine(connection_string)
