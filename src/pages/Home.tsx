@@ -66,7 +66,11 @@ function Home() {
               to="/catalog?category=men"
               className="category-card"
             >
-              <div className="category-image category-men"></div>
+              <div
+                className="category-image category-men"
+                role="img"
+                aria-label="Коллекция мужских часов"
+              />
 
               <div className="category-info">
                 <h3>Мужские часы</h3>
@@ -78,7 +82,11 @@ function Home() {
               to="/catalog?category=women"
               className="category-card"
             >
-              <div className="category-image category-women"></div>
+              <div
+                className="category-image category-women"
+                role="img"
+                aria-label="Коллекция женских часов"
+              />
 
               <div className="category-info">
                 <h3>Женские часы</h3>
@@ -90,7 +98,11 @@ function Home() {
               to="/catalog?category=premium"
               className="category-card"
             >
-              <div className="category-image category-premium"></div>
+              <div
+                className="category-image category-premium"
+                role="img"
+                aria-label="Премиальная коллекция часов"
+              />
 
               <div className="category-info">
                 <h3>Премиум коллекция</h3>
@@ -123,14 +135,10 @@ function Home() {
                   <div className="product-image">
                     {product.Image && (
                       <img
-                        className={
-                          product.Image?.toLowerCase().includes("omega")
-                            ? "watch-image watch-image-omega"
-                            : "watch-image"
-                        }
+                        className="watch-image"
                         src={`/images/${product.Image.replace(/\.(jpg|jpeg)$/i, ".png")}`}
                         alt={product.ModelName}
-                    />
+                      />
                     )}
                   </div>
 
@@ -141,17 +149,20 @@ function Home() {
 
                     <h3>{product.ModelName}</h3>
 
-                    <button className="favorite-button">
+                    <button
+                      className="favorite-button"
+                      type="button"
+                      aria-label={`Добавить ${product.ModelName} в избранное`}
+                    >
                       ♡
                     </button>
 
                     <div className="product-bottom">
-                      <span>{product.Price.toLocaleString("ru-RU")} ₽
+                      <span>
+                        {product.Price.toLocaleString("ru-RU")} ₽
                       </span>
 
-                      <Link
-                        to={`/catalog/${product.ProductID}`}
-                      >
+                      <Link to={`/catalog/${product.ProductID}`}>
                         Подробнее
                       </Link>
                     </div>

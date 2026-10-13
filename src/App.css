@@ -235,18 +235,19 @@ a {
   inset: 0;
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .category-men {
-  background-image: url("/images/men-watches.jpg");
+  background-image: url("/images/men-watches.png");
 }
 
 .category-women {
-  background-image: url("/images/women-watches.jpg");
+  background-image: url("/images/women-watches.png");
 }
 
 .category-premium {
-  background-image: url("/images/premium-watches.jpg");
+  background-image: url("/images/premium-watches.png");
 }
 
 .category-card::after {
