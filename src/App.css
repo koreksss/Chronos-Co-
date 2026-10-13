@@ -16,6 +16,7 @@ a {
 
 .home {
   min-height: 100vh;
+  padding-top: 82px;
 }
 
 /* Шапка */
@@ -71,69 +72,83 @@ a {
   border-radius: 6px;
 }
 
-.hero {
-  min-height: calc(100vh - 82px);
-  padding: 80px 90px;
 
+.hero {
+  position: relative;
+  min-height: 743px;
+  padding: 80px 6%;
   display: flex;
   align-items: center;
 
-  background:
+  background-color: #071a36;
+  background-image:
     linear-gradient(
       90deg,
-      rgba(7, 26, 54, 0.96) 0%,
-      rgba(7, 26, 54, 0.72) 45%,
-      rgba(7, 26, 54, 0.2) 100%
+      #071a36 0%,
+      rgba(7, 26, 54, 0.96) 35%,
+      rgba(7, 26, 54, 0.25) 100%
     ),
-    url("/images/watch-background.jpg") center / cover no-repeat;
+    url("/images/rolex_submariner.png");
 
+  background-position: center, right 7% center;
+  background-size: cover, auto 88%;
+  background-repeat: no-repeat;
   color: white;
 }
 
 .hero-content {
-  max-width: 650px;
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
 }
 
 .hero-label {
-  margin: 0 0 18px;
-  font-size: 14px;
-  letter-spacing: 4px;
+  margin: 0 0 22px;
+  font-size: 13px;
+  letter-spacing: 5px;
   color: #c9d2df;
 }
 
 .hero h1 {
   margin: 0 0 25px;
-  font-size: 68px;
-  line-height: 1.05;
-  font-weight: 500;
+  font-size: clamp(44px, 5vw, 72px);
+  line-height: 1.08;
+  font-weight: 400;
 }
 
 .hero-description {
+  max-width: 480px;
   margin: 0 0 38px;
-  font-size: 21px;
-  line-height: 1.5;
+  font-size: 19px;
+  line-height: 1.7;
   color: #d9e0e8;
 }
 
 .hero-button {
   display: inline-block;
-  padding: 14px 28px;
-
-  background: white;
+  padding: 15px 30px;
+  background: #ffffff;
   color: #071a36;
-
   text-decoration: none;
-  border-radius: 5px;
-
-  font-size: 16px;
-  font-weight: 500;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .hero-button:hover {
-  opacity: 0.85;
+  background: transparent;
+  color: #ffffff;
 }
 
+
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
   width: 100%;
   height: 82px;
   padding: 0 70px;
@@ -144,6 +159,7 @@ a {
 
   background: #071a36;
   color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.85);
 }
 
 .site-logo {
@@ -190,13 +206,14 @@ a {
 }
 
 .categories {
-  padding: 90px 70px;
+  height: 743px;
+  padding: 70px 70px;
   background: #f2f3f5;
 }
 
 .section-heading {
   text-align: center;
-  margin-bottom: 45px;
+  margin-bottom: 50px;
 }
 
 .section-heading p {
@@ -222,7 +239,7 @@ a {
 }
 
 .category-card {
-  min-height: 380px;
+  height: 420px;
   position: relative;
   overflow: hidden;
   border-radius: 10px;
@@ -281,14 +298,14 @@ a {
 }
 
 .featured {
-  padding: 90px 70px;
+  height: 743px;
+  padding: 70px 70px;
   background: #ffffff;
 }
 
 .product-grid {
   max-width: 1300px;
   margin: 0 auto;
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
@@ -379,4 +396,16 @@ a {
   color: #536174;
   font-size: 14px;
   text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 82px;
+}
+
+.hero,
+.categories,
+.featured {
+  scroll-snap-align: start;
 }
