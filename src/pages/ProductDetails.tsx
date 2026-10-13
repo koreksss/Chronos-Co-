@@ -60,7 +60,7 @@ function ProductDetails() {
       <main className="product-details">
         <div className="product-details-image">
           <img
-            src={`/images/${product.Image}`}
+            src={`/images/${product.Image.replace(/\.(jpg|jpeg)$/i, ".png")}`}
             alt={product.ModelName}
           />
         </div>

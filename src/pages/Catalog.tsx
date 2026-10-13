@@ -53,7 +53,7 @@ function Catalog() {
                 <div className="product-image">
                   {product.Image && (
                     <img
-                      src={`/images/${product.Image}`}
+                      src={`/images/${product.Image.replace(/\.(jpg|jpeg)$/i, ".png")}`}
                       alt={product.ModelName}
                     />
                   )}
