@@ -81,11 +81,30 @@ function ProductDetails() {
           <p className="product-details-description">
             {product.Description}
           </p>
-
+       
           <div className="product-specifications">
             <h3>Характеристики</h3>
             <p>{product.Specifications}</p>
           </div>
+
+          <details className="product-expand">
+            <summary>Описание и история модели</summary>
+            <p>{product.Description}</p>
+            <p>
+              {product.ModelName} — модель, в которой дизайн,
+              внимание к деталям и особенности часового механизма
+              формируют индивидуальный характер часов.
+            </p>
+          </details>
+
+          <details className="product-expand">
+            <summary>О бренде {product.BrandName}</summary>
+            <p>
+              {product.BrandName} — бренд, представленный в коллекции
+              Chronos &amp; Co. Подробнее об истории марки и её
+              часовых традициях можно узнать в разделе «Бренды».
+            </p>
+          </details>
 
           <p className="product-article">
             Артикул: {product.Article}
