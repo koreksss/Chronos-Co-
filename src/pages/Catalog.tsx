@@ -64,7 +64,7 @@ function Catalog() {
                     {product.BrandName}
                   </p>
 
-                  <h3>{product.ModelName}</h3>
+                  <h2>{product.ModelName}</h2>
 
                   <p className="product-description">
                     {product.Description}

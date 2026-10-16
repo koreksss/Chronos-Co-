@@ -83,7 +83,7 @@ function ProductDetails() {
           </p>
        
           <div className="product-specifications">
-            <h3>Характеристики</h3>
+            <h2>Характеристики</h2>
             <p>{product.Specifications}</p>
           </div>
 
