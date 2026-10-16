@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from config.database import test_connection
 from routes.brands import brands_bp
@@ -10,6 +10,12 @@ from routes.cart import cart_bp
 from routes.clients import clients_bp
 
 app = Flask(__name__)
+@app.after_request
+def add_robots_header(response):
+    if request.path.startswith("/api/"):
+        response.headers["X-Robots-Tag"] = "noindex, nofollow"
+    return response
+
 CORS(app)
 
 app.register_blueprint(brands_bp)
