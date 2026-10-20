@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /login
+Disallow: /favorites
+Disallow: /cart
 
 Sitemap: https://example.com/sitemap.xml
-
