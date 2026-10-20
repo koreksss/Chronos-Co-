@@ -1,5 +1,10 @@
 function Favorites() {
-  return <h1>Избранное</h1>;
+  return (
+    <>
+      <meta name="robots" content="noindex" />
+      <h1>Избранное</h1>
+    </>
+  );
 }
 
 export default Favorites;
