@@ -1,3 +1,4 @@
+
 from flask import Blueprint, jsonify
 from sqlalchemy import text
 from config.database import engine
@@ -12,20 +13,20 @@ def get_products():
             result = connection.execute(
                 text("""
                     SELECT
-                        p.ProductID,
-                        p.ModelName,
-                        p.Article,
-                        p.Price,
-                        p.Description,
-                        p.Image,
-                        p.Specifications,
-                        b.BrandName,
-                        c.CategoryName
-                    FROM Products p
-                    INNER JOIN Brands b
-                        ON p.BrandID = b.BrandID
-                    INNER JOIN Categories c
-                        ON p.CategoryID = c.CategoryID
+                        p."ProductID",
+                        p."ModelName",
+                        p."Article",
+                        p."Price",
+                        p."Description",
+                        p."Image",
+                        p."Specifications",
+                        b."BrandName",
+                        c."CategoryName"
+                    FROM "Products" p
+                    INNER JOIN "Brands" b
+                        ON p."BrandID" = b."BrandID"
+                    INNER JOIN "Categories" c
+                        ON p."CategoryID" = c."CategoryID"
                 """)
             )
 
@@ -47,6 +48,4 @@ def get_products():
             return jsonify(products)
 
     except Exception as e:
-        return jsonify({
-            "error": str(e)
-        }), 500
+        return jsonify({"error": str(e)}), 500
