@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { getProducts } from "../services/api";
+import { getProductImageUrl } from "../services/storage";
 
 interface Product {
   ProductID: number;
@@ -30,7 +31,9 @@ function Home() {
       });
   }, []);
 
-  const featuredProducts = products.slice(0, 3);
+  const featuredProducts = products.filter((product) =>
+    [12, 5, 2].includes(product.ProductID)
+  );
 
   return (
     <div className="home">
@@ -136,7 +139,7 @@ function Home() {
                     {product.Image && (
                       <img
                         className="watch-image"
-                        src={`/images/${product.Image.replace(/\.(jpg|jpeg)$/i, ".png")}`}
+                        src={getProductImageUrl(product.Image)}
                         alt={product.ModelName}
                       />
                     )}

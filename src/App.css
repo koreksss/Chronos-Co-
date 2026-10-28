@@ -88,7 +88,7 @@ a {
       rgba(7, 26, 54, 0.55) 40%,
       rgba(7, 26, 54, 0.05) 100%
     ),
-    url("/images/hero-watch.png");
+    url("https://xkvlpbxsahrgadbhrbge.supabase.co/storage/v1/object/public/product-images/hero-watch.png");
 
   background-position: center;
   background-size: cover;
@@ -256,15 +256,15 @@ a {
 }
 
 .category-men {
-  background-image: url("/images/men-watches.png");
+  background-image: url("https://xkvlpbxsahrgadbhrbge.supabase.co/storage/v1/object/public/product-images/men-watches.png");
 }
 
 .category-women {
-  background-image: url("/images/women-watches.png");
+  background-image: url("https://xkvlpbxsahrgadbhrbge.supabase.co/storage/v1/object/public/product-images/women-watches.png");
 }
 
 .category-premium {
-  background-image: url("/images/premium-watches.png");
+  background-image: url("https://xkvlpbxsahrgadbhrbge.supabase.co/storage/v1/object/public/product-images/premium-watches.png");
 }
 
 .category-card::after {

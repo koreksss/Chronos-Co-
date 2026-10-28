@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { getProducts } from "../services/api";
+import { getProductImageUrl } from "../services/storage";
 
 interface Product {
   ProductID: number;
@@ -53,7 +54,7 @@ function Catalog() {
                 <div className="product-image">
                   {product.Image && (
                     <img
-                      src={`/images/${product.Image.replace(/\.(jpg|jpeg)$/i, ".png")}`}
+                      src={getProductImageUrl(product.Image)} 
                       alt={product.ModelName}
                     />
                   )}
