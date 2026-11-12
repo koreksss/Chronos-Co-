@@ -1,5 +1,4 @@
-
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
 
 export async function getProducts() {
   const response = await fetch(`${API_URL}/api/products`);
