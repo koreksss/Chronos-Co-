@@ -1,6 +1,9 @@
+import os
+
 from flask import Flask, request
 from werkzeug.middleware.proxy_fix import ProxyFix
 from flask_cors import CORS
+
 from config.database import test_connection
 from routes.brands import brands_bp
 from routes.products import products_bp
@@ -9,6 +12,7 @@ from routes.product_items import product_items_bp
 from routes.favorites import favorites_bp
 from routes.cart import cart_bp
 from routes.clients import clients_bp
+
 
 app = Flask(__name__)
 
@@ -20,11 +24,13 @@ app.wsgi_app = ProxyFix(
     x_port=1
 )
 
+
 @app.after_request
 def add_robots_header(response):
     if request.path.startswith("/api/"):
         response.headers["X-Robots-Tag"] = "noindex, nofollow"
     return response
+
 
 CORS(app)
 
@@ -42,8 +48,8 @@ def home():
     return "Chronos & Co Backend is running!"
 
 
-test_connection()
-
-
 if __name__ == "__main__":
+    if os.getenv("SKIP_DB_CHECK") != "1":
+        test_connection()
+
     app.run(host="0.0.0.0", port=5000, debug=True)
