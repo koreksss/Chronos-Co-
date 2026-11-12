@@ -1,4 +1,5 @@
 from flask import Flask, request
+from werkzeug.middleware.proxy_fix import ProxyFix
 from flask_cors import CORS
 from config.database import test_connection
 from routes.brands import brands_bp
@@ -10,6 +11,15 @@ from routes.cart import cart_bp
 from routes.clients import clients_bp
 
 app = Flask(__name__)
+
+app.wsgi_app = ProxyFix(
+    app.wsgi_app,
+    x_for=1,
+    x_proto=1,
+    x_host=1,
+    x_port=1
+)
+
 @app.after_request
 def add_robots_header(response):
     if request.path.startswith("/api/"):
