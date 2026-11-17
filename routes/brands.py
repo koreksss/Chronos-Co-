@@ -11,8 +11,14 @@ def get_brands():
         with engine.connect() as connection:
             result = connection.execute(
                 text("""
-                    SELECT BrandID, BrandName, Country, Description
-                    FROM Brands
+                    SELECT
+                        "BrandID",
+                        "BrandName",
+                        "Country",
+                        "Description",
+                        "LogoURL"
+                    FROM "Brands"
+                    ORDER BY "BrandID"
                 """)
             )
 
@@ -23,12 +29,11 @@ def get_brands():
                     "BrandID": row.BrandID,
                     "BrandName": row.BrandName,
                     "Country": row.Country,
-                    "Description": row.Description
+                    "Description": row.Description,
+                    "LogoURL": row.LogoURL
                 })
 
             return jsonify(brands)
 
     except Exception as e:
-        return jsonify({
-            "error": str(e)
-        }), 500
+        return jsonify({"error": str(e)}), 500
