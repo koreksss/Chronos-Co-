@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import { Link, useSearchParams } from "react-router-dom";
 import { getProducts } from "../services/api";
 import { getProductImageUrl } from "../services/storage";
 
@@ -20,6 +19,9 @@ function Catalog() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchParams] = useSearchParams();
+
+  const selectedBrand = searchParams.get("brand");
 
   useEffect(() => {
     getProducts()
@@ -33,60 +35,77 @@ function Catalog() {
       });
   }, []);
 
+  const filteredProducts = selectedBrand
+    ? products.filter(
+        (product) =>
+          product.BrandName.toLowerCase() === selectedBrand.toLowerCase()
+      )
+    : products;
+
   return (
-    <div className="catalog-page">
-      <Header />
+    <main className="catalog">
+      <div className="section-heading">
+        <p>CHRONOS & CO</p>
+        <h1>
+          {selectedBrand ? `Часы ${selectedBrand}` : "Каталог часов"}
+        </h1>
 
-      <main className="catalog">
-        <div className="section-heading">
-          <p>CHRONOS & CO</p>
-          <h1>Каталог часов</h1>
-        </div>
+        {selectedBrand && (
+          <Link to="/catalog" className="catalog-reset">
+            Посмотреть все бренды и модели
+          </Link>
+        )}
+      </div>
 
-        {loading && <p className="catalog-message">Загрузка товаров...</p>}
+      {loading && <p className="catalog-message">Загрузка товаров...</p>}
 
-        {error && <p className="catalog-message">{error}</p>}
+      {error && <p className="catalog-message">{error}</p>}
 
-        {!loading && !error && (
-          <div className="product-grid">
-            {products.map((product) => (
-              <div className="product-card" key={product.ProductID}>
-                <div className="product-image">
-                  {product.Image && (
-                    <img
-                      src={getProductImageUrl(product.Image)} 
-                      alt={product.ModelName}
-                    />
-                  )}
-                </div>
+      {!loading && !error && (
+        <>
+          {filteredProducts.length > 0 ? (
+            <div className="product-grid">
+              {filteredProducts.map((product) => (
+                <div className="product-card" key={product.ProductID}>
+                  <div className="product-image">
+                    {product.Image && (
+                      <img
+                        src={getProductImageUrl(product.Image)}
+                        alt={product.ModelName}
+                      />
+                    )}
+                  </div>
 
-                <div className="product-info">
-                  <p className="product-brand">
-                    {product.BrandName}
-                  </p>
+                  <div className="product-info">
+                    <p className="product-brand">{product.BrandName}</p>
 
-                  <h2>{product.ModelName}</h2>
+                    <h2>{product.ModelName}</h2>
 
-                  <p className="product-description">
-                    {product.Description}
-                  </p>
+                    <p className="product-description">
+                      {product.Description}
+                    </p>
 
-                  <div className="product-bottom">
-                    <span>
-                      {product.Price.toLocaleString("ru-RU")} ₽
-                    </span>
+                    <div className="product-bottom">
+                      <span>
+                        {product.Price.toLocaleString("ru-RU")} ₽
+                      </span>
 
-                    <Link to={`/catalog/${product.ProductID}`}>
-                      Подробнее
-                    </Link>
+                      <Link to={`/catalog/${product.ProductID}`}>
+                        Подробнее
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </main>
-    </div>
+              ))}
+            </div>
+          ) : (
+            <p className="catalog-message">
+              Часы этого бренда пока отсутствуют в каталоге.
+            </p>
+          )}
+        </>
+      )}
+    </main>
   );
 }
 

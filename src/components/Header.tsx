@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom";
 
+interface Client {
+  ClientID: number;
+  FirstName: string;
+  LastName: string;
+  Phone: string;
+  Email: string;
+}
+
 function Header() {
+  const savedClient = localStorage.getItem("client");
+  const client: Client | null = savedClient
+    ? JSON.parse(savedClient)
+    : null;
+
   return (
     <header className="site-header">
       <Link to="/" className="site-logo">
@@ -23,9 +36,15 @@ function Header() {
           🛒
         </Link>
 
-        <Link to="/login" className="login-button">
-          Войти
-        </Link>
+        {client ? (
+          <Link to="/account" className="login-button">
+            {client.FirstName}
+          </Link>
+        ) : (
+          <Link to="/login" className="login-button">
+            Войти
+          </Link>
+        )}
       </div>
     </header>
   );

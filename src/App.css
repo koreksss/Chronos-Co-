@@ -602,3 +602,880 @@ html {
     padding: 5px 0;
   }
 }
+
+/* Авторизация и регистрация */
+
+.auth-page {
+  min-height: 100vh;
+  padding-top: 82px;
+  background: #f2f3f5;
+}
+
+.auth-main {
+  min-height: calc(100vh - 82px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 45px 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 45px 50px;
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  box-shadow: 0 12px 35px rgba(7, 26, 54, 0.07);
+}
+
+.auth-label {
+  margin: 0 0 15px;
+  color: #718096;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 4px;
+}
+
+.auth-card h1 {
+  margin: 0;
+  color: #071a36;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.auth-description {
+  margin: 12px 0 28px;
+  color: #718096;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.auth-tabs button {
+  flex: 1;
+  padding: 13px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #718096;
+  cursor: pointer;
+}
+
+.auth-tabs button.active {
+  border-bottom-color: #071a36;
+  color: #071a36;
+  font-weight: 600;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #071a36;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  height: 46px;
+  padding: 0 13px;
+  border: 1px solid #d9dee6;
+  border-radius: 4px;
+  outline: none;
+  background: #fff;
+  color: #111827;
+  font-size: 14px;
+}
+
+.auth-form input:focus {
+  border-color: #071a36;
+}
+
+.auth-form input::placeholder {
+  color: #a0a9b6;
+}
+
+.auth-error {
+  margin: 0;
+  color: #c0392b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.auth-submit {
+  height: 49px;
+  margin-top: 5px;
+  border: 1px solid #071a36;
+  border-radius: 4px;
+  background: #071a36;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+
+.auth-submit:hover {
+  background: #19375e;
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-footer {
+  margin: 25px 0 15px;
+  color: #718096;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-footer button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #071a36;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.auth-back {
+  display: block;
+  color: #718096;
+  text-align: center;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.auth-back:hover {
+  color: #071a36;
+}
+
+@media (max-width: 520px) {
+  .auth-card {
+    padding: 35px 22px;
+  }
+
+  .auth-card h1 {
+    font-size: 25px;
+  }
+}
+
+.auth-password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-password-field input {
+  padding-right: 85px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  padding: 5px;
+  border: none;
+  background: transparent;
+  color: #718096;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.password-toggle:hover {
+  color: #071a36;
+}
+
+/* Уведомления */
+.app-toast {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 380px;
+  padding: 16px 22px;
+  background: #ffffff;
+  color: #1b2638;
+  border-left: 4px solid #c5a46d;
+  border-radius: 6px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  animation: toastAppear 0.3s ease;
+}
+
+.toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #c5a46d;
+  color: white;
+  font-weight: bold;
+}
+
+.app-toast.error {
+  border-left-color: #c94b4b;
+}
+
+.app-toast.error .toast-icon {
+  background: #c94b4b;
+}
+
+@keyframes toastAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   ЛИЧНЫЙ КАБИНЕТ CHRONOS & CO
+================================ */
+
+.account-page {
+  min-height: 100vh;
+  background: #f3f5f8;
+}
+
+/* Основная область */
+
+.account-main {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 115px 30px 90px;
+  box-sizing: border-box;
+}
+
+/* Заголовок страницы */
+
+.account-heading {
+  text-align: center;
+  margin-bottom: 42px;
+}
+
+.account-heading .account-label {
+  color: #647b9b;
+  font-size: 12px;
+  letter-spacing: 4px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.account-heading h1 {
+  color: #0b1d38;
+  font-size: 36px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+
+.account-heading > p:last-child {
+  color: #788697;
+  font-size: 15px;
+  margin: 0;
+}
+
+/* Карточка профиля */
+
+.account-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 42px 48px;
+  background: #ffffff;
+  border: 1px solid #dce2eb;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(11, 29, 56, 0.06);
+  box-sizing: border-box;
+}
+
+/* Верхняя часть профиля */
+
+.account-card-top {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.account-avatar {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #0b1d38;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.account-welcome span {
+  color: #647b9b;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.account-welcome h2 {
+  color: #0b1d38;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 8px 0;
+}
+
+.account-welcome p {
+  color: #858f9e;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Разделители */
+
+.account-divider {
+  height: 1px;
+  background: #e5e9ef;
+  margin: 32px 0;
+}
+
+/* Личные данные */
+
+.account-section-title {
+  color: #0b1d38;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 24px;
+}
+
+.account-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 35px;
+}
+
+.account-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.account-info-item span {
+  color: #8995a5;
+  font-size: 13px;
+}
+
+.account-info-item strong {
+  color: #172b46;
+  font-size: 15px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* Нижняя часть карточки */
+
+.account-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.account-bottom p {
+  color: #8995a5;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Кнопка выхода */
+
+.account-logout {
+  padding: 11px 18px;
+  border: 1px solid #e2bcbc;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #bd3030;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.account-logout:hover {
+  background: #fff4f4;
+  border-color: #bd3030;
+}
+
+/* Адаптация для телефона */
+
+@media (max-width: 600px) {
+  .account-main {
+    padding: 90px 16px 60px;
+  }
+
+  .account-heading {
+    margin-bottom: 30px;
+  }
+
+  .account-heading h1 {
+    font-size: 28px;
+  }
+
+  .account-card {
+    padding: 28px 22px;
+  }
+
+  .account-card-top {
+    gap: 16px;
+  }
+
+  .account-avatar {
+    width: 58px;
+    height: 58px;
+    font-size: 25px;
+  }
+
+  .account-welcome h2 {
+    font-size: 19px;
+  }
+
+  .account-info {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .account-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+/* ================================
+   СТРАНИЦА О КОМПАНИИ
+================================ */
+
+.about-page {
+  min-height: 100vh;
+  background: #f3f5f8;
+  color: #0b1d38;
+}
+
+/* Первый экран */
+
+.about-hero {
+  padding: 100px 25px 110px;
+  text-align: center;
+  background: #0b1d38;
+  color: #ffffff;
+}
+
+.about-label {
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: #aebed2;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.about-hero h1 {
+  max-width: 800px;
+  margin: 0 auto 22px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.about-hero > p:last-child {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #c1ccda;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* История компании */
+
+.about-intro {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 30px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 70px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.about-section-label {
+  color: #647b9b;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin-bottom: 18px;
+}
+
+.about-intro-text h2,
+.about-values h2 {
+  color: #0b1d38;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0 0 24px;
+}
+
+.about-intro-text > p:not(.about-section-label) {
+  color: #68788c;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+
+/* Декоративный блок */
+
+.about-intro-card {
+  min-height: 310px;
+  background: #0b1d38;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 15px 35px rgba(11, 29, 56, 0.12);
+}
+
+.about-intro-card span {
+  font-size: 27px;
+  letter-spacing: 8px;
+  font-weight: 500;
+}
+
+.about-intro-card strong {
+  font-size: 35px;
+  font-weight: 300;
+  color: #aebed2;
+  margin: 5px 0;
+}
+
+.about-intro-card p {
+  color: #b9c6d5;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-top: 25px;
+}
+
+/* Принципы */
+
+.about-values {
+  padding: 85px 30px 100px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.about-values h2 {
+  margin-bottom: 48px;
+}
+
+.about-values-grid {
+  max-width: 1050px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  text-align: left;
+}
+
+.about-value-card {
+  padding: 32px 28px;
+  border: 1px solid #e1e6ed;
+  border-radius: 5px;
+  background: #ffffff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.about-value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(11, 29, 56, 0.07);
+}
+
+.about-value-card > span {
+  color: #647b9b;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.about-value-card h3 {
+  color: #0b1d38;
+  font-size: 21px;
+  font-weight: 500;
+  margin: 20px 0 12px;
+}
+
+.about-value-card p {
+  color: #788697;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Цитата */
+
+.about-quote {
+  padding: 75px 25px;
+  background: #e9edf3;
+  text-align: center;
+}
+
+.about-quote p {
+  color: #0b1d38;
+  font-size: 27px;
+  font-weight: 400;
+  font-style: italic;
+  margin: 0 0 18px;
+}
+
+.about-quote span {
+  color: #647b9b;
+  font-size: 11px;
+  letter-spacing: 4px;
+}
+
+/* Переход в каталог */
+
+.about-cta {
+  padding: 85px 25px;
+  text-align: center;
+  background: #0b1d38;
+  color: #ffffff;
+}
+
+.about-cta h2 {
+  max-width: 700px;
+  margin: 0 auto 18px;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.about-cta p {
+  color: #b9c6d5;
+  margin-bottom: 30px;
+}
+
+.about-catalog-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background: #ffffff;
+  color: #0b1d38;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 14px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.about-catalog-button:hover {
+  background: #dce4ee;
+}
+
+/* Адаптация */
+
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 75px 20px;
+  }
+
+  .about-hero h1 {
+    font-size: 34px;
+  }
+
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 65px 22px;
+  }
+
+  .about-intro-text h2,
+  .about-values h2 {
+    font-size: 27px;
+  }
+
+  .about-values {
+    padding: 65px 20px;
+  }
+
+  .about-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-quote p {
+    font-size: 21px;
+  }
+
+  .about-cta h2 {
+    font-size: 26px;
+  }
+}
+
+
+
+.brands-page {
+  min-height: 100vh;
+  padding: 135px 5% 55px;
+  background: #f3f5f8;
+}
+
+.brands-heading {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 55px;
+}
+
+.brands-heading span {
+  color: #6682a8;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 4px;
+}
+
+.brands-heading h1 {
+  color: #0b1e3a;
+  font-size: 38px;
+  font-weight: 400;
+  margin: 15px 0;
+}
+
+.brands-heading p {
+  color: #718096;
+  line-height: 1.7;
+}
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.brand-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #e1e6ed;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.brand-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(11, 30, 58, 0.08);
+}
+
+.brand-card:focus-visible {
+  outline: 2px solid #071a36;
+  outline-offset: 4px;
+}
+
+.brand-logo {
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: #fff;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.brand-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.brand-info {
+  padding: 22px;
+}
+
+.brand-info h2 {
+  color: #0b1e3a;
+  font-size: 21px;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+
+.brand-country {
+  color: #718096;
+  font-size: 13px;
+}
+
+.brand-info p {
+  color: #718096;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 16px 0 0;
+}
+
+.brands-message {
+  text-align: center;
+  padding: 120px 20px 80px;
+  color: #718096;
+}
+
+.catalog-reset {
+  display: inline-block;
+  margin-top: 15px;
+  color: #647b9b;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.catalog-reset:hover {
+  color: #071a36;
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .brands-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .brands-page {
+    padding: 100px 20px 40px;
+  }
+
+  .brands-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brands-heading h1 {
+    font-size: 30px;
+  }
+}
