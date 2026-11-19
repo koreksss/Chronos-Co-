@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { getProducts } from "../services/api";
 import { getProductImageUrl } from "../services/storage";
 
@@ -15,14 +15,35 @@ interface Product {
   Article: string;
 }
 
+interface CartItem {
+  ProductID: number;
+}
+
+const API_URL = import.meta.env.PROD ? "" : "http://localhost:5001";
+
 function Catalog() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+  const [cartProductIds, setCartProductIds] = useState<number[]>([]);
+  const [cartAddingId, setCartAddingId] = useState<number | null>(null);
+
+  const [clientId] = useState<number | null>(() => {
+    try {
+      const client = JSON.parse(localStorage.getItem("client") || "null");
+      return client?.ClientID ?? null;
+    } catch {
+      return null;
+    }
+  });
+
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const selectedBrand = searchParams.get("brand");
 
+  // Загружаем товары
   useEffect(() => {
     getProducts()
       .then((data) => {
@@ -34,6 +55,170 @@ function Catalog() {
         setLoading(false);
       });
   }, []);
+
+  // Загружаем избранное пользователя
+  useEffect(() => {
+    if (!clientId) {
+      setFavoriteIds([]);
+      return;
+    }
+
+    async function loadFavorites() {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/favorites/${clientId}`,
+          { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+          throw new Error("Не удалось загрузить избранное");
+        }
+
+        const data = await response.json();
+
+        setFavoriteIds(
+          data.map((item: { ProductID: number }) => item.ProductID)
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    loadFavorites();
+
+    window.addEventListener("favorites-updated", loadFavorites);
+
+    return () => {
+      window.removeEventListener("favorites-updated", loadFavorites);
+    };
+  }, [clientId]);
+
+  // Добавление и удаление из избранного
+  async function toggleFavorite(productId: number) {
+    if (!clientId) {
+      navigate("/login");
+      return;
+    }
+
+    const isFavorite = favoriteIds.includes(productId);
+
+    setFavoriteIds((prev) =>
+      isFavorite
+        ? prev.filter((id) => id !== productId)
+        : [...prev, productId]
+    );
+
+    try {
+      const response = await fetch(
+        isFavorite
+          ? `${API_URL}/api/favorites/${clientId}/${productId}`
+          : `${API_URL}/api/favorites`,
+        isFavorite
+          ? { method: "DELETE" }
+          : {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                ClientID: clientId,
+                ProductID: productId,
+              }),
+            }
+      );
+
+      if (!response.ok) {
+        throw new Error("Не удалось обновить избранное");
+      }
+
+      window.dispatchEvent(new Event("favorites-updated"));
+    } catch (error) {
+      setFavoriteIds((prev) =>
+        isFavorite
+          ? [...prev, productId]
+          : prev.filter((id) => id !== productId)
+      );
+
+      console.error(error);
+    }
+  }
+
+  // Загружаем корзину пользователя
+  useEffect(() => {
+    if (!clientId) {
+      setCartProductIds([]);
+      return;
+    }
+
+    async function loadCart() {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/cart/${clientId}`,
+          { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+          throw new Error("Не удалось загрузить корзину");
+        }
+
+        const data: CartItem[] = await response.json();
+
+        setCartProductIds([
+          ...new Set(data.map((item) => item.ProductID)),
+        ]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    loadCart();
+
+    window.addEventListener("cart-updated", loadCart);
+
+    return () => {
+      window.removeEventListener("cart-updated", loadCart);
+    };
+  }, [clientId]);
+
+  // Добавление товара в корзину
+  async function addToCart(productId: number) {
+    if (!clientId) {
+      navigate("/login");
+      return;
+    }
+
+    if (cartProductIds.includes(productId)) {
+      return;
+    }
+
+    setCartAddingId(productId);
+
+    try {
+      const response = await fetch(`${API_URL}/api/cart`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ClientID: clientId,
+          ProductID: productId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Не удалось добавить товар");
+      }
+
+      setCartProductIds((prev) => [...prev, productId]);
+
+      window.dispatchEvent(new Event("cart-updated"));
+    } catch (error) {
+      console.error(error);
+
+      // Обновляем данные на случай, если товар уже добавлен
+      window.dispatchEvent(new Event("cart-updated"));
+    } finally {
+      setCartAddingId(null);
+    }
+  }
 
   const filteredProducts = selectedBrand
     ? products.filter(
@@ -65,38 +250,71 @@ function Catalog() {
         <>
           {filteredProducts.length > 0 ? (
             <div className="product-grid">
-              {filteredProducts.map((product) => (
-                <div className="product-card" key={product.ProductID}>
-                  <div className="product-image">
-                    {product.Image && (
-                      <img
-                        src={getProductImageUrl(product.Image)}
-                        alt={product.ModelName}
-                      />
-                    )}
-                  </div>
+              {filteredProducts.map((product) => {
+                const isFavorite = favoriteIds.includes(product.ProductID);
+                const isInCart = cartProductIds.includes(product.ProductID);
 
-                  <div className="product-info">
-                    <p className="product-brand">{product.BrandName}</p>
+                return (
+                  <div className="product-card" key={product.ProductID}>
+                    <div className="product-image">
+                      {product.Image && (
+                        <img
+                          className="watch-image"
+                          src={getProductImageUrl(product.Image)}
+                          alt={product.ModelName}
+                        />
+                      )}
 
-                    <h2>{product.ModelName}</h2>
+                      <button
+                        className={`favorite-button ${isFavorite ? "active" : ""}`}
+                        type="button"
+                        aria-label={
+                          isFavorite
+                            ? "Удалить из избранного"
+                            : "Добавить в избранное"
+                        }
+                        aria-pressed={isFavorite}
+                        onClick={() => toggleFavorite(product.ProductID)}
+                      >
+                        <span className="heart-icon">♥</span>
+                      </button>
+                    </div>
 
-                    <p className="product-description">
-                      {product.Description}
-                    </p>
+                    <div className="product-info">
+                      <p className="product-brand">{product.BrandName}</p>
 
-                    <div className="product-bottom">
-                      <span>
-                        {product.Price.toLocaleString("ru-RU")} ₽
-                      </span>
+                      <h2>{product.ModelName}</h2>
 
-                      <Link to={`/catalog/${product.ProductID}`}>
-                        Подробнее
-                      </Link>
+                      <p className="product-description">
+                        {product.Description}
+                      </p>
+
+                      <div className="product-bottom">
+                        <span>
+                          {product.Price.toLocaleString("ru-RU")} ₽
+                        </span>
+
+                        <Link to={`/catalog/${product.ProductID}`}>
+                          Подробнее
+                        </Link>
+                      </div>
+
+                      <button
+                        className={`add-to-cart-button ${isInCart ? "in-cart" : ""}`}
+                        type="button"
+                        disabled={isInCart || cartAddingId === product.ProductID}
+                        onClick={() => addToCart(product.ProductID)}
+                      >
+                        {cartAddingId === product.ProductID
+                          ? "Добавление..."
+                          : isInCart
+                            ? "✓ В корзине"
+                            : "Добавить в корзину"}
+                      </button>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <p className="catalog-message">
