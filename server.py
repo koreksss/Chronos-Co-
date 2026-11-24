@@ -32,7 +32,20 @@ def add_robots_header(response):
     return response
 
 
-CORS(app)
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": [
+                "http://localhost:5174",
+                "http://localhost:5173",
+                "https://chronosco.localhost"
+            ]
+        }
+    },
+    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"]
+)
 
 app.register_blueprint(brands_bp)
 app.register_blueprint(products_bp)
