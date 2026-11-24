@@ -1,0 +1,122 @@
+/* Шапка сайта */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  width: 100%;
+  height: 82px;
+  padding: 0 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #071a36;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+/* Логотип */
+
+.site-logo {
+  color: white;
+  text-decoration: none;
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Навигация */
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.site-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.site-nav a:hover {
+  opacity: 0.7;
+}
+
+/* Правая часть шапки */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-actions a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Общие настройки иконок */
+
+.header-actions .header-icon-link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+
+  line-height: 1;
+  text-decoration: none;
+}
+
+/* Сердечко */
+
+.favorite-header-link {
+  font-size: 27px;
+}
+
+/* Корзина */
+
+.cart-header-link {
+  font-size: 21px;
+}
+
+/* Кнопка входа */
+
+.header-actions .login-button {
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+/* Счётчик товаров в корзине */
+
+.cart-count {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #e53945;
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 600;
+}

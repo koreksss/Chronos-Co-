@@ -13,6 +13,13 @@ import Favorites from "./pages/Favorites";
 import Cart from "./pages/Cart";
 import ProductDetails from "./pages/ProductDetails";
 import Account from "./pages/Account";
+import "./components_css/Products.css";
+import "./pages_css/Login.css";
+import "./pages_css/About.css";
+import "./pages_css/Brands.css";
+import "./pages_css/Cart.css";
+import "./pages_css/Account.css";
+import "./components_css/ProductDetails.css";
 
 interface ToastData {
   message: string;

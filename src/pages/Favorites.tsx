@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProductImageUrl } from "../services/storage";
+import "../pages_css/Favorites.css";
 
 interface Favorite {
   FavoriteID: number;
@@ -13,7 +14,7 @@ interface Favorite {
   BrandName: string;
 }
 
-const API_URL = import.meta.env.PROD ? "" : "http://localhost:5001";
+const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
 
 function Favorites() {
   const [favorites, setFavorites] = useState<Favorite[]>([]);

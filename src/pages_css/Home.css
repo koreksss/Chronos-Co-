@@ -1,0 +1,165 @@
+/* ГЛАВНАЯ СТРАНИЦА */
+
+.home {
+  min-height: 100vh;
+  padding-top: 82px;
+}
+
+/* ПЕРВЫЙ ЭКРАН */
+
+.hero {
+  position: relative;
+  height: 743px;
+  min-height: 743px;
+  padding: 80px 6%;
+
+  display: flex;
+  align-items: center;
+
+  background-color: #071a36;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(7, 26, 54, 0.88) 0%,
+      rgba(7, 26, 54, 0.55) 40%,
+      rgba(7, 26, 54, 0.05) 100%
+    ),
+    url("https://xkvlpbxsahrgadbhrbge.supabase.co/storage/v1/object/public/product-images/hero-watch.png");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  scroll-snap-align: start;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+.hero-label {
+  margin: 0 0 22px;
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: #c9d2df;
+}
+
+.hero h1 {
+  margin: 0 0 25px;
+  font-size: clamp(44px, 5vw, 72px);
+  line-height: 1.08;
+  font-weight: 400;
+}
+
+.hero-description {
+  max-width: 480px;
+  margin: 0 0 38px;
+  font-size: 19px;
+  line-height: 1.7;
+  color: #d9e0e8;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background: #ffffff;
+  color: #071a36;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.hero-button:hover {
+  background: transparent;
+  color: #ffffff;
+}
+
+/* КОЛЛЕКЦИИ */
+
+.categories {
+  height: 743px;
+  padding: 70px 70px;
+  background: #f2f3f5;
+  scroll-snap-align: start;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.category-card {
+  height: 420px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  text-decoration: none;
+  background: #071a36;
+}
+
+.category-image {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.category-men {
+  background-image: url("https://xkvlpbxsahrgadbhrbge.supabase.co/storage/v1/object/public/product-images/men-watches.png");
+}
+
+.category-women {
+  background-image: url("https://xkvlpbxsahrgadbhrbge.supabase.co/storage/v1/object/public/product-images/women-watches.png");
+}
+
+.category-premium {
+  background-image: url("https://xkvlpbxsahrgadbhrbge.supabase.co/storage/v1/object/public/product-images/premium-watches.png");
+}
+
+.category-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 30%,
+    rgba(7, 26, 54, 0.9)
+  );
+}
+
+.category-info {
+  position: absolute;
+  z-index: 2;
+  left: 28px;
+  right: 28px;
+  bottom: 25px;
+  color: white;
+}
+
+.category-info h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.category-info span {
+  font-size: 14px;
+  color: #d7dee8;
+}
+
+/* ПРЕМИАЛЬНАЯ КОЛЛЕКЦИЯ */
+
+.featured {
+  height: 743px;
+  padding: 70px 70px;
+  background: #ffffff;
+  scroll-snap-align: start;
+}

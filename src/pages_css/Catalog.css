@@ -1,0 +1,43 @@
+/* Страница каталога */
+
+.catalog {
+  padding-bottom: 40px;
+}
+
+/* Заголовок каталога */
+
+.catalog .section-heading {
+  padding: 125px 20px 0;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.catalog .section-heading p {
+  margin: 0 0 10px;
+  color: #718096;
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+
+.catalog .section-heading h1 {
+  margin: 0;
+  color: #071a36;
+  font-size: 36px;
+  font-weight: 500;
+}
+
+/* Сброс фильтра по бренду */
+
+.catalog-reset {
+  display: inline-block;
+  margin-top: 18px;
+  color: #536174;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.catalog-reset:hover {
+  color: #071a36;
+  text-decoration: underline;
+}

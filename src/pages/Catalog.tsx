@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { getProducts } from "../services/api";
 import { getProductImageUrl } from "../services/storage";
+import "../pages_css/Catalog.css";
 
 interface Product {
   ProductID: number;
@@ -19,7 +20,7 @@ interface CartItem {
   ProductID: number;
 }
 
-const API_URL = import.meta.env.PROD ? "" : "http://localhost:5001";
+const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
 
 function Catalog() {
   const [products, setProducts] = useState<Product[]>([]);

@@ -1,3 +1,4 @@
+import "../pages_css/Home.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getProducts } from "../services/api";
@@ -19,7 +20,7 @@ interface CartItem {
   ProductID: number;
 }
 
-const API_URL = import.meta.env.PROD ? "" : "http://localhost:5001";
+const API_URL = import.meta.env.PROD ? "" : "http://localhost:5000";
 
 function Home() {
   const [products, setProducts] = useState<Product[]>([]);

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../components_css/Header.css";
 
 interface Client {
   ClientID: number;
@@ -88,12 +89,9 @@ function Header() {
       const customEvent = event as CartUpdatedEvent;
       const total = customEvent.detail?.total;
 
-      // Если новое количество передано в событии,
-      // обновляем счётчик сразу, без запроса к API
       if (typeof total === "number") {
         setCartCount(total);
       } else {
-        // Если количество не передано, загружаем его с сервера
         loadCartCount();
       }
     }
@@ -119,17 +117,31 @@ function Header() {
       </nav>
 
       <div className="header-actions">
-        <Link to="/favorites" title="Избранное">
+        {/* Избранное */}
+        <Link
+          to="/favorites"
+          title="Избранное"
+          aria-label="Избранное"
+          className="header-icon-link favorite-header-link"
+        >
           ♡
         </Link>
 
-        <Link to="/cart" title="Корзина" className="cart-header-link">
+        {/* Корзина */}
+        <Link
+          to="/cart"
+          title="Корзина"
+          aria-label="Корзина"
+          className="cart-header-link header-icon-link"
+        >
           🛒
+
           {cartCount > 0 && (
             <span className="cart-count">{cartCount}</span>
           )}
         </Link>
 
+        {/* Вход или личный кабинет */}
         {client ? (
           <Link to="/account" className="login-button">
             {client.FirstName}

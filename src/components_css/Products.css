@@ -1,0 +1,138 @@
+/* Сетка товаров */
+.product-grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.product-card {
+  overflow: hidden;
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.product-image {
+  height: 330px;
+  padding: 0;
+  background: #071a36;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: translateY(5px) scale(1.18);
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: translateY(5px) scale(1.23);
+}
+
+/* Информация о товаре */
+.product-info {
+  position: relative;
+  padding: 22px;
+}
+
+.product-brand {
+  margin: 0 0 5px;
+  color: #718096;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.product-info h3 {
+  margin: 0;
+  color: #071a36;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.product-bottom {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-bottom span {
+  color: #071a36;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.product-bottom a {
+  color: #536174;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* Кнопка избранного */
+.favorite-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #dfe3e8;
+  border-radius: 50%;
+  background: white;
+  font-size: 20px;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #0d2342;
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.favorite-button.active {
+  color: #e53945;
+  -webkit-text-stroke: 1px #e53945;
+}
+
+.heart-icon {
+  display: block;
+  line-height: 1;
+}
+
+.favorite-button:active {
+  transform: scale(0.9);
+}
+
+/* Кнопка корзины */
+.add-to-cart-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 13px 16px;
+  border: 1px solid #0d2342;
+  border-radius: 5px;
+  background: #0d2342;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.add-to-cart-button:hover:not(:disabled) {
+  background: #193b65;
+}
+
+.add-to-cart-button:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.add-to-cart-button.in-cart {
+  background: #e9eef4;
+  border-color: #d5deea;
+  color: #0d2342;
+}
